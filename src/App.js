@@ -1,26 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router-dom';
+import HomePage from './components/pages/HomePage';
+import LogInPage from './components/pages/LogInPage';
+import SignUpPage from './components/pages/SignUpPage'
+import DashboardPage from './components/pages/DashboardPage';
+import UserRoute from './components/routes/UserRoute';
+import GuestRoute from './components/routes/GuestRoute';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
+const App = ({location}) => 
+  <div className="ui container">
+    <Route location={location} path='/' exact component={HomePage} />
+    <GuestRoute location={location} path='/login' exact component={LogInPage} />
+    <GuestRoute location={location} path='/signup' exact component={SignUpPage} />
+    <UserRoute location={location} path='/dashboard' exact component={DashboardPage} />
+  </div>
+ 
 export default App;
