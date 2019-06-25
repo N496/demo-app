@@ -10,6 +10,7 @@ import { composeWithDevTools} from 'redux-devtools-extension';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { userLoggedIn } from './actions/auth';
+import setAuthorizationHeader from './utils/setAuthorizationHeader';
 
 const store = createStore( 
     rootReducer,
@@ -17,7 +18,11 @@ const store = createStore(
 )
 
 if(localStorage.ecommerceJWT) {
-    const user = {auth_token: localStorage.ecommerceJWT };
+    const user = {
+        auth_token: localStorage.ecommerceJWT,
+        isConfirmed: true
+    };
+    setAuthorizationHeader(localStorage.ecommerceJWT)
     store.dispatch(userLoggedIn(user))
 }
 
